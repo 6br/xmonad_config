@@ -31,7 +31,7 @@ baseConfig = desktopConfig
 main :: IO ()
 main = do
   myStatusBar <- spawnPipe "xmobar"
-	xmonad $ ewmh $ baseConfig {
+  xmonad $ ewmh baseConfig {
     terminal = "urxvt",
     modMask = myModMask,
     manageHook      = myManageHook,
@@ -39,7 +39,7 @@ main = do
     layoutHook = myLayout,
     logHook = myLogHook myStatusBar
   }
-                 `additionalKeysP` myAdditionalKeysP
+    `additionalKeysP` myAdditionalKeysP
 
 myLayout = spacing 2 $ avoidStruts $ dwmStyle shrinkText defaultTheme
   (spiral(6/7) ||| TwoPane (1/55) (1/2) ||| OneBig (3/4) (3/4) ||| Full |||
@@ -57,7 +57,7 @@ myManageHook =   insertPosition Below Newer
 
 myLayoutHook = avoidStruts $ layoutHook defaultConfig
 
-myLogHook h = dynamicLogWithPP xmobarPP {
+myLogHook h = dynamicLogWithPP $ xmobarPP {
                     ppSep    = " | "
                   , ppTitle  = xmobarColor "green" "" . shorten 80
                   , ppOutput = hPutStrLn h
